@@ -366,14 +366,10 @@ export class WebglCharAtlas implements IDisposable {
       0, 0, this._tmpCanvas.width, this._tmpCanvas.height
     );
 
-    // TODO: Support transparency
-    // let isEmpty = false;
-    // if (!this._config.allowTransparency) {
-    //   isEmpty = clearColor(imageData, backgroundColor);
-    // }
-
-    // Clear out the background color and determine if the glyph is empty.
-    const isEmpty = clearColor(imageData, backgroundColor);
+    let isEmpty = false;
+    if (!this._config.allowTransparency) {
+      isEmpty = clearColor(imageData, backgroundColor);
+    }
 
     // Handle empty glyphs
     if (isEmpty) {
