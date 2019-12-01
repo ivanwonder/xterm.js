@@ -19,6 +19,11 @@ const enum VertexAttribLocations {
   UNIT_QUAD = 3
 }
 
+const TRANSPARENT_COLOR: IColor = {
+  css: 'rgba(0, 0, 0, 0)',
+  rgba: 0
+};
+
 const vertexShaderSource = `#version 300 es
 layout (location = ${VertexAttribLocations.POSITION}) in vec2 a_position;
 layout (location = ${VertexAttribLocations.SIZE}) in vec2 a_size;
@@ -154,7 +159,7 @@ export class RectangleRenderer {
   }
 
   private _updateCachedColors(): void {
-    this._bgFloat = this._colorToFloat32Array(this._colors.background);
+    this._bgFloat = this._colorToFloat32Array(this._terminal.getOption('allowTransparency') ? TRANSPARENT_COLOR : this._colors.background);
     this._selectionFloat = this._colorToFloat32Array(this._colors.selectionOpaque);
   }
 
